@@ -1,8 +1,8 @@
-import React from 'react';
-import { Container, Form, Row, Button } from 'react-bootstrap';
-import { request } from '../../helper/helper';
-import Loading from '../../loading/loading';
-import MessagePrompt from '../../prompts/message';
+import React from "react";
+import { Container, Form, Row, Button } from "react-bootstrap";
+import { request } from "../../helper/helper";
+import Loading from "../../loading/loading";
+import MessagePrompt from "../../prompts/message";
 
 export default class EstanquesCrear extends React.Component {
   constructor(props) {
@@ -10,17 +10,16 @@ export default class EstanquesCrear extends React.Component {
     this.state = {
       rediret: false,
       message: {
-        text: '',
+        text: "",
         show: false,
       },
       loading: false,
       estanque: {
-        nombre: '',
-        apellido_p: '',
-        apellido_m: '',
-        telefono: '',
-        mail: '',
-        direccion: '',
+        nombre: "",
+        fecha_inicial: "",
+        costo_peces: "",
+        fecha_final: "",
+        venta_peces: "",
       },
     };
     this.onExitedMessage = this.onExitedMessage.bind(this);
@@ -38,7 +37,7 @@ export default class EstanquesCrear extends React.Component {
   guardarEstanques() {
     this.setState({ loading: true });
     request
-      .post('/estanques', this.state.estanque)
+      .post("/estanques", this.state.estanque)
       .then((response) => {
         if (response.data.exito) {
           this.setState({
@@ -58,7 +57,7 @@ export default class EstanquesCrear extends React.Component {
   }
 
   onExitedMessage() {
-    if (this.state.rediret) this.props.changeTab('buscar');
+    if (this.state.rediret) this.props.changeTab("buscar");
   }
 
   render() {
@@ -81,42 +80,35 @@ export default class EstanquesCrear extends React.Component {
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
-                onChange={(e) => this.setValue('nombre', e.target.value)}
+                onChange={(e) => this.setValue("nombre", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Apellido Paterno</Form.Label>
+              <Form.Label>Fecha Inicial</Form.Label>
               <Form.Control
-                onChange={(e) => this.setValue('apellido_p', e.target.value)}
+                onChange={(e) => this.setValue("fecha_inicial", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Apellido Materno</Form.Label>
+              <Form.Label>Costo de los Peces</Form.Label>
               <Form.Control
-                onChange={(e) => this.setValue('apellido_m', e.target.value)}
+                onChange={(e) => this.setValue("costo_peces", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Telefono</Form.Label>
+              <Form.Label>Fecha Final</Form.Label>
               <Form.Control
-                onChange={(e) => this.setValue('telefono', e.target.value)}
+                onChange={(e) => this.setValue("fecha_final", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Valor Venta de Peces</Form.Label>
               <Form.Control
-                onChange={(e) => this.setValue('mail', e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Dirrecion</Form.Label>
-              <Form.Control
-                onChange={(e) => this.setValue('direccion', e.target.value)}
+                onChange={(e) => this.setValue("venta_peces", e.target.value)}
               />
             </Form.Group>
 

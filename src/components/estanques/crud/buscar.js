@@ -1,42 +1,37 @@
-import React from 'react';
-import { request } from '../../helper/helper';
-import { Container, Row, Col } from 'react-bootstrap';
+import React from "react";
+import { request } from "../../helper/helper";
+import { Container, Row, Col } from "react-bootstrap";
 //import './estanques.css';
-import DataGrid from '../../grid/grid';
-import ConfirmationPromprs from '../../prompts/confirmation';
-import Loading from '../../loading/loading';
-import MessagePrompt from '../../prompts/message';
-import { set } from 'react-ga';
+import DataGrid from "../../grid/grid";
+import ConfirmationPromprs from "../../prompts/confirmation";
+import Loading from "../../loading/loading";
+import MessagePrompt from "../../prompts/message";
 
 const columns = [
   {
-    dataField: '_id',
-    text: 'Product ID',
+    dataField: "_id",
+    text: "Product ID",
     hidden: true,
   },
   {
-    dataField: 'nombre',
-    text: 'Nombre',
+    dataField: "nombre",
+    text: "Nombre",
   },
   {
-    dataField: 'apellido_p',
-    text: 'Apellido paterno',
+    dataField: "fecha_inicial",
+    text: "Fecha Inicial",
   },
   {
-    dataField: 'apellido_m',
-    text: 'Apellido materno',
+    dataField: "costo_peces",
+    text: "Costo Peces",
   },
   {
-    dataField: 'telefono',
-    text: 'Telefono',
+    dataField: "fecha_final",
+    text: "Fecha Final",
   },
   {
-    dataField: 'mail',
-    text: 'Email',
-  },
-  {
-    dataField: 'direccion',
-    text: 'Direccion',
+    dataField: "venta_peces",
+    text: "Venta Peces",
   },
 ];
 
@@ -47,12 +42,12 @@ export default class EstanquesBuscar extends React.Component {
       loading: false,
       idEstanque: null,
       confirmation: {
-        title: 'Eliminar el estanque',
-        text: '¿Deseas eliminar el estanque?',
+        title: "Eliminar el estanque",
+        text: "¿Deseas eliminar el estanque?",
         show: false,
       },
       message: {
-        text: '',
+        text: "",
         show: false,
       },
     };
@@ -66,7 +61,7 @@ export default class EstanquesBuscar extends React.Component {
   onClickEditButton(row) {
     this.props.setIdEstanque(row._id);
 
-    this.props.changeTab('editar');
+    this.props.changeTab("editar");
   }
 
   onClickDeleteButton(row) {

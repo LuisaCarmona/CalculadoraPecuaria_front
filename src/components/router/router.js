@@ -5,6 +5,7 @@ import PrivateRoute from "../auth/privateroute";
 import login from "../login/login";
 import Estanque from "../estanques";
 import Home from "../pages/home/home";
+import registro from '../registro/registro';
 
 export default function AppRouter() {
   return (
@@ -12,6 +13,7 @@ export default function AppRouter() {
       <Switch>
         <Route exact path={["/"]} component={Home} />
         <Route exact path={["/login"]} component={login} />
+        <Route exact path={['/registro']} component={registro} />
         <PrivateRoute exact path="/estanques" component={Estanque} />
         <Route
           path={"*"}

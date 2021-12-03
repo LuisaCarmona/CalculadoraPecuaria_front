@@ -1,3 +1,13 @@
 h1 {
-  margin-top: 300px;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+a {
+  margin-top: 10px;
+  margin-right: 30px;
 }

@@ -37,7 +37,7 @@ export default class login extends React.Component {
             expires: calculaExpiracionSesion(),
           });
 
-          this.props.history.push("/estanques");
+          this.props.history.push("/estanque");
         }
 
         this.setState({ loading: false });
@@ -80,9 +80,7 @@ export default class login extends React.Component {
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control
                       type="password"
-                      onChange={(e) =>
-                        this.setState({ password: e.target.value })
-                      }
+                      onChange={(e) => this.setState({ pass: e.target.value })}
                     />
                   </Form.Group>
                   <Button

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Modal } from 'react-bootstrap';
-import './prompts.css';
-import { isUndefined, isNull } from 'util';
+import React from "react";
+import { Modal } from "react-bootstrap";
+import "./prompts.css";
+import { isUndefined, isNull } from "util";
 
 export default class MessagePrompt extends React.Component {
   constructor(props) {

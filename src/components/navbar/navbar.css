@@ -23,3 +23,12 @@
 .logo {
   width: 65%;
 }
+#navbar-in {
+  font-size: 50px;
+}
+#navbar-sub-brand {
+  font-size: 25px;
+}
+#navbar-img {
+  width: 20%;
+}

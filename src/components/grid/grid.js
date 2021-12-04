@@ -1,17 +1,17 @@
-import React from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
+import React from "react";
+import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
   PaginationProvider,
   PaginationListStandalone,
   SizePerPageDropdownStandalone,
-} from 'react-bootstrap-table2-paginator';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Row, Col, Button } from 'react-bootstrap';
-import { request } from '../helper/helper';
-import Loading from '../loading/loading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { isUndefined } from 'util';
+} from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { Row, Col, Button } from "react-bootstrap";
+import { request } from "../helper/helper";
+import Loading from "../loading/loading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { isUndefined } from "util";
 
 const { SearchBar } = Search;
 
@@ -19,14 +19,14 @@ export default class DataGrid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Loading: false,
+      loading: false,
       rows: [],
     };
 
-    if (this.props.showEditButton && !this.existsColumn('Editar'))
+    if (this.props.showEditButton && !this.existsColumn("Editar"))
       this.props.columns.push(this.getEditButton());
 
-    if (this.props.showDeleteButton && !this.existsColumn('Eliminar'))
+    if (this.props.showDeleteButton && !this.existsColumn("Eliminar"))
       this.props.columns.push(this.getDeleteButton());
   }
 
@@ -57,7 +57,7 @@ export default class DataGrid extends React.Component {
 
   getEditButton() {
     return {
-      text: 'Editar',
+      text: "Editar",
       formatter: (cell, row) => {
         //console.log(row);
 
@@ -72,7 +72,7 @@ export default class DataGrid extends React.Component {
 
   getDeleteButton() {
     return {
-      text: 'Eliminar',
+      text: "Eliminar",
       formatter: (cell, row) => {
         return (
           <Button onClick={() => this.props.onClickDeleteButton(row)}>

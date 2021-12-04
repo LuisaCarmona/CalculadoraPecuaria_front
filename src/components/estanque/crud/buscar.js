@@ -35,7 +35,7 @@ const columns = [
   },
 ];
 
-export default class EstanquesBuscar extends React.Component {
+export default class EstanqueBuscar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -98,7 +98,7 @@ export default class EstanquesBuscar extends React.Component {
   eliminarEstanque() {
     this.setState({ loading: true });
     request
-      .delete(`/estanques/${this.state.idEstanque}`)
+      .delete(`/estanque/${this.state.idEstanque}`)
       .then((response) => {
         this.setState({
           loading: false,
@@ -123,7 +123,7 @@ export default class EstanquesBuscar extends React.Component {
 
   render() {
     return (
-      <Container id="estanques-buscar-container">
+      <Container id="estanque-buscar-container">
         <ConfirmationPromprs
           show={this.state.confirmation.show}
           title={this.state.confirmation.title}
@@ -142,11 +142,11 @@ export default class EstanquesBuscar extends React.Component {
         <Loading show={this.state.loading} />
 
         <Row>
-          <h1>Buscar estanques</h1>
+          <h1>Buscar estanque</h1>
         </Row>
         <Row>
           <DataGrid
-            url="/estanques"
+            url="/estanque"
             columns={columns}
             showEditButton={true}
             showDeleteButton={true}

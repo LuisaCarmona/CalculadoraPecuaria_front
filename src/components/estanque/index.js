@@ -1,15 +1,15 @@
-import React from 'react';
-import { Container, Nav, Row } from 'react-bootstrap';
-import EstanquesBuscar from './crud/buscar';
-import EstanquesCrear from './crud/crear';
-import EstanquesEditar from './crud/editar';
-import './estanques.css';
+import React from "react";
+import { Container, Nav, Row } from "react-bootstrap";
+import EstanqueBuscar from "./crud/buscar";
+import EstanqueCrear from "./crud/crear";
+import EstanqueEditar from "./crud/editar";
+import "./estanque.css";
 
-export default class Estanques extends React.Component {
+export default class Estanque extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTab: 'buscar',
+      currentTab: "buscar",
       _id: null,
     };
     this.changeTab = this.changeTab.bind(this);
@@ -31,7 +31,7 @@ export default class Estanques extends React.Component {
   //
   render() {
     return (
-      <Container id="estanques-container">
+      <Container id="estanque-container">
         <Row>
           <Nav
             fill
@@ -48,15 +48,15 @@ export default class Estanques extends React.Component {
           </Nav>
         </Row>
         <Row>
-          {this.state.currentTab === 'buscar' ? (
-            <EstanquesBuscar
+          {this.state.currentTab === "buscar" ? (
+            <EstanqueBuscar
               changeTab={this.changeTab}
               setIdEstanque={this.setIdEstanque}
             />
-          ) : this.state.currentTab === 'crear' ? (
-            <EstanquesCrear changeTab={this.changeTab} />
+          ) : this.state.currentTab === "crear" ? (
+            <EstanqueCrear changeTab={this.changeTab} />
           ) : (
-            <EstanquesEditar
+            <EstanqueEditar
               changeTab={this.changeTab}
               getIdEstanque={this.getIdEstanque}
             />

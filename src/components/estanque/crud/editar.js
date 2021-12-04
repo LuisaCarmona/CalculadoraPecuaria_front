@@ -3,14 +3,21 @@ import { Container, Form, Row, Button } from "react-bootstrap";
 import { request } from "../../helper/helper";
 import Loading from "../../loading/loading";
 import MessagePrompt from "../../prompts/message";
+import ConfirmationPromprs from "../../prompts/confirmation";
 
-export default class EstanquesCrear extends React.Component {
+export default class EstanqueEditar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      idEstanque: this.props.getIdEstanque(),
       rediret: false,
       message: {
         text: "",
+        show: false,
+      },
+      confirmation: {
+        title: "Modificar estanque",
+        text: "¿Deseas modificar el estanque?",
         show: false,
       },
       loading: false,
@@ -23,6 +30,28 @@ export default class EstanquesCrear extends React.Component {
       },
     };
     this.onExitedMessage = this.onExitedMessage.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.onConfirm = this.onConfirm.bind(this);
+  }
+
+  componentDidMount() {
+    this.getEstanque();
+  }
+
+  getEstanque() {
+    this.setState({ loading: true });
+    request
+      .get(`/estanque/${this.state.idEstanque}`)
+      .then((response) => {
+        this.setState({
+          estanque: response.data,
+          loading: false,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
   }
 
   setValue(index, value) {
@@ -34,10 +63,10 @@ export default class EstanquesCrear extends React.Component {
     });
   }
 
-  guardarEstanques() {
+  guardarEstanque() {
     this.setState({ loading: true });
     request
-      .post("/estanques", this.state.estanque)
+      .put(`/es/${this.state.idEstanque}`, this.state.estanque)
       .then((response) => {
         if (response.data.exito) {
           this.setState({
@@ -60,9 +89,30 @@ export default class EstanquesCrear extends React.Component {
     if (this.state.rediret) this.props.changeTab("buscar");
   }
 
+  onCancel() {
+    this.setState({
+      confirmation: {
+        ...this.state.confirmation,
+        show: false,
+      },
+    });
+  }
+
+  onConfirm() {
+    this.setState(
+      {
+        confirmation: {
+          ...this.state.confirmation,
+          show: false,
+        },
+      },
+      this.guardarEstanque()
+    );
+  }
+
   render() {
     return (
-      <Container id="estanques-crear-container">
+      <Container id="estanque-crear-container">
         <MessagePrompt
           text={this.state.message.text}
           show={this.state.message.show}
@@ -70,16 +120,25 @@ export default class EstanquesCrear extends React.Component {
           onExited={this.onExitedMessage}
         />
 
+        <ConfirmationPromprs
+          show={this.state.confirmation.show}
+          title={this.state.confirmation.title}
+          text={this.state.confirmation.text}
+          onCancel={this.onCancel}
+          onConfirm={this.onConfirm}
+        />
+
         <Loading show={this.state.loading} />
 
         <Row>
-          <h1>Crear Estanques</h1>
+          <h1>Editar Estanque</h1>
         </Row>
         <Row>
           <Form>
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
+                value={this.state.estanque.nombre}
                 onChange={(e) => this.setValue("nombre", e.target.value)}
               />
             </Form.Group>
@@ -87,34 +146,42 @@ export default class EstanquesCrear extends React.Component {
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Fecha Inicial</Form.Label>
               <Form.Control
+                value={this.state.estanque.fecha_inicial}
                 onChange={(e) => this.setValue("fecha_inicial", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Costo de los Peces</Form.Label>
+              <Form.Label>Costo Compra Peces</Form.Label>
               <Form.Control
+                value={this.state.estanque.costo_peces}
                 onChange={(e) => this.setValue("costo_peces", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Fecha Final</Form.Label>
+              <Form.Label>Fecha Final de Producción</Form.Label>
               <Form.Control
+                value={this.state.estanque.fecha_final}
                 onChange={(e) => this.setValue("fecha_final", e.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Valor Venta de Peces</Form.Label>
+              <Form.Label>Valor Venta de los Peces</Form.Label>
               <Form.Control
+                value={this.state.estanque.venta_peces}
                 onChange={(e) => this.setValue("venta_peces", e.target.value)}
               />
             </Form.Group>
 
             <Button
               variant="primary"
-              onClick={() => console.log(this.guardarEstanques())}
+              onClick={() =>
+                this.setState({
+                  confirmation: { ...this.state.confirmation, show: true },
+                })
+              }
             >
               Guardar Estanque
             </Button>

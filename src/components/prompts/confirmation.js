@@ -1,13 +1,13 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React from "react";
+import { Modal, Button } from "react-bootstrap";
 
 export default class ConfirmationPromprs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show: false,
-      title: '',
-      text: '',
+      title: "",
+      text: "",
     };
   }
 
